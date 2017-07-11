@@ -14,7 +14,10 @@ use strict;
 use warnings;
 
 $filename = $ARGV[0]; #Tab Delimited Design File
-$location = /Users/knaggert/Desktop/pcf11_summer/yeastData/; #User Directory Where .psl Files are Kept
+$psllocation = /Users/knaggert/Desktop/pcf11_summer/yeastData/; #User Directory Where .psl Files are Kept
+$makefilelocation = /Users/knaggert/Desktop/pcf11_summer/;
+$makefileBase = $ARGV[1]; #Base Makefile
+$existingdir = /Users/knaggert/Desktop/pcf11_summer/outFiles’; #Directory where the makefile will be created
 
 open($fh => $filename) || die "Cannot open $filename: $!"; #Attempts to Open File, if it Can’t Kills Program and Returns Error Message
 
