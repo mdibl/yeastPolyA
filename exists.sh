@@ -36,3 +36,17 @@ while($line = <$fh>) { #While There are Still Lines in the File Loop Through The
 }
 close($fh);
 
+if (-e "$location/$pslFile”) { #If the File Exists Prints That the File Exists
+    		print "File $makefilelocation/$makefileBase exists.\n";
+		open my $fileHandle, ">>", "$existingdir/assignedMakefile” or die "Can't open '$existingdir/assignedMakefile'\n"; 
+		system(cat makefileBase >> assignedMakefile);
+		print “assignedCat.txt : $(assignedFiles)\n”;
+		print ““\t”cat $(assignedFiles) > $@\n\n”;
+		
+		close $fileHandle;
+			}
+else { #If the File Can’t be Found it Kills the Program and Returns an Error Message
+			die “$makefileBase does not exist in $makefilelocation”;
+		}
+
+
