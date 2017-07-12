@@ -25,8 +25,6 @@ include configFile.txt  #Including the configuration file allows user to manipul
 %_assigned.txt: $(outDir)%_siteCount_withSeqs.txt $(auxDir)$(sortedFeatures) $(CPATH)AssignSitesToGenes #Creates the _assigned.txt file by running the AssignSitesToGenes code with _withSeqs.txt and sortedFeatures as arguements
 	$(CPATH)AssignSitesToGenes $< $(auxDir)$(sortedFeatures) > $(outDir)$@  #Need to change the directory that the sortedFeatures file is in, in the c++ code as well
 
-CollectSiteCountsOutputFiles: $(outDir)%_assigned.txt $(CPATH)CollectSiteCounts #Creates the two output files from the CollectSiteCounts code with _assigned.txt as the cole arguement
-	$(CPATH)CollectSiteCounts $< > $(outDir)$@
 
 
 
