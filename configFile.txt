@@ -11,3 +11,5 @@ outDir=/Users/knaggert/Desktop/pcf11_summer/outFiles/
 faFile=sacCer3_genome_plus_2mic_ERCC92_one-line-seqs.fa
 faiFile=sacCer3_genome_plus_2mic_ERCC92_one-line-seqs.fa.fai
 sortedFeatures=sorted_saccer3_simple_features_with_SUT_CUT_2micron_07Dec2016.txt
+expNm=pcf11_caff
+assingedFiles=*_assigned.txt
