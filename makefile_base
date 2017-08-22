@@ -1,11 +1,37 @@
 makefile:
+
+# Script Name: makefile_base
+# Author: Kristoph S. N. Naggert, Thursday August 10th 2017
+# Type: Makefile
+
+# Arguments: Name of File You Want to Make
+
+# Execution: make (fileName)
+
+# Overview:  The makefile builds all of the files in the pcf11 project workflow.
+
+# Variables: All variables are held in a configuration file that can be updated and changed outside of the script.
+
+# PAD = (Not entirely sure what this is used for)
+# FAC = (Not entirely sure what this is used for)
+# CPATH = Directory where all codes, scripts, and programs are located
+# DPATH = Directory where all .psl files are located
+# rootDir = The root directory for the project
+# auxDir = Directory where all auxiliary files are located
+# outDir = Directory where all files made by makefile are saved to
+# faFile = fa file, located in auxDir
+# faiFile = fai file, located in auxDir
+# sortedFeatures = Feature file, located in auxDir
+# expNm = Project prefix
+# separator = string used to split up certain lines (Can be anything apart from a single '_')
+
 include /Users/knaggert/Desktop/pcf11_summer/configFile.txt  #Including the configuration file allows user to manipulate variables used through makefile
 
-%_alnCount.txt: $(DPATH)%.psl #Creates the _alnCount.txt file from the .psl file
+%_alnCount.txt: $(DPATH)%.psl #Creates the _alnCount.txt file, sequenceAliignement | number of allignments, from the .psl file
 	echo $(DPATH) $<
 	grep seq $< | perl -ane "if(@F[0]>=(@F[10]*$(FAC)) && @F[17]<2) { print \"@F[9]\n\";} " | uniq -c | perl -ane "print \"@F[1]\t@F[0]\n\"; " | sort > $(outDir)$@
 
-%_tgtCount.txt: $(DPATH)%.psl #Creates the _tgtCount.txt  file from the .psl file
+%_tgtCount.txt: $(DPATH)%.psl #Creates the _tgtCount.txt, chromosome_startPos+size_(+ or -) | number of times it appears in the .psl file, file from the .psl file
 	echo $(DPATH) $<
 	grep seq $< | perl -ane "if(@F[0]>=(@F[10]*$(FAC)) && @F[17]<2) { if(@F[8] eq \"-\") { print \"@F[13]_\"; print (@F[16]+@F[11]); print \"_-\n\";} else { print \"@F[13]_\"; print (@F[15]-@F[11]); print \"_+\n\";} } " | sort | uniq -c | perl -ane "print \"@F[1]\t@F[0]\n\"; " > $(outDir)$@ 
 
@@ -16,12 +42,13 @@ include /Users/knaggert/Desktop/pcf11_summer/configFile.txt  #Including the conf
 %_siteCount.txt: %_tgt_aln.txt $(CPATH)CondenseTagsToSiteCount #Creates the _siteCounts.txt file from the CondenseTagsToSiteCount code with _tgt_aln.txt as an arguement
 	$(CPATH)CondenseTagsToSiteCount $< > $(outDir)$@
 
-%_siteCount.bed: %_siteCount.txt #Converts the _siteCount.txt file to _siteCount.bed via commandline command
-	perl -ne "s/_\+/_#/; s/_\-/_+/; s/_#/_-/; s/_/\t/g; print; " $< | perl -ane "print \"@F[0]\t\"; print (@F[1]-$(PAD)); print \"\t\"; print (@F[1]+$(PAD)); print \"\tsamplename\t@F[3]\t@F[2]\t@F[4]\t@F[5]\n\"; " > $(outDir)$@
+%_siteCount.bed: %_siteCount.txt #Converts the _siteCount.txt file to _siteCount.bed
+	perl -ne "s/_\+/_#/; s/_\-/_+/; s/_#/_-/; s/_/\t/g; print; " $< | perl -ane "print \"@F[0]\t\"; print (@F[1]-$(PAD)); print \"\t\"; print (@F[1]+$(PAD)); print \"\t$<\t@F[3]\t@F[2]\t@F[4]\t@F[5]\n\"; " | perl -ne "s/\_siteCount.txt//; print" > $(outDir)$@
 
 %_siteCount_withSeqs.txt: %_siteCount.bed $(auxDir)$(faFile) $(CPATH)faGetBedSequences $(auxDir)$(faiFile) #Creates the _siteCount_withSeqs.txt file by running the faGetBedSequences code with faFile and _siteCount.bed as arguements, that is then piped to a perl command the modifies the datafile and then produces the final output file
-	$(CPATH)faGetBedSequences $(auxDir)$(faFile) $< | perl -ne "s/_/\t/g; print" | perl -ane "print \"@F[0]\t@F[1]\t@F[2]\t@F[3]\t@F[4]\t@F[5]\t\"; print substr(@F[6],0,$(PAD)); print \"\t\"; print substr(@F[6],$(PAD),2*$(PAD)); print \"\t@F[7]_\"; print ((@F[2]+@F[3])/2); print \"_@F[4]_@F[5]\t@F[12]\t@F[13]\n\"; " > $(outDir)$@
+	$(CPATH)faGetBedSequences $(auxDir)$(faFile) $< $(separator) | perl -ne "s/$(separator)/\t/g; print" | perl -ane "print \"@F[0]\t@F[1]\t@F[2]\t@F[3]\t@F[4]\t@F[5]\t\"; print substr(@F[6],0,$(PAD)); print \"\t\"; print substr(@F[6],$(PAD),2*$(PAD)); print \"\t@F[7]_\"; print ((@F[2]+@F[3])/2); print \"_@F[4]_@F[5]\t@F[12]\t@F[13]\n\"; " > $(outDir)$@
 
 %_assigned.txt: %_siteCount_withSeqs.txt $(auxDir)$(sortedFeatures) $(CPATH)AssignSitesToGenes #Creates the _assigned.txt file by running the AssignSitesToGenes code with _withSeqs.txt and sortedFeatures as arguements
 	$(CPATH)AssignSitesToGenes $< $(auxDir)$(sortedFeatures) > $(outDir)$@  #Need to change the directory that the sortedFeatures file is in, in the c++ code as well
 
+.SECONDARY: #When building prerequisite files this keeps those files from being delete after the final file is made
