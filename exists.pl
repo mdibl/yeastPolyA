@@ -31,7 +31,7 @@ use FileHandle;
 use File::Copy;
 
 
-my $psllocation = "/data/internal/Biocore/pcf11_summer/yeastData/";
+my $psllocation = "/data/internal/Biocore/pcf11_summer/abc/";
 my $makefilelocation = "/opt/software/internal/yeastPolyA/";
 my $makefileBase = "makefile_base";
 my $assignedMakefile = "makefile";
