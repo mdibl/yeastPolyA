@@ -1,5 +1,3 @@
-makefile:
-
 # Script Name: makefile
 # Author: Kristoph S. N. Naggert, Thursday August 10th 2017
 # Type: Makefile
