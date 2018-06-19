@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <functional>
 
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/util.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/util.h"
 
 class chrFeature {
 public:
@@ -32,7 +32,7 @@ int seqLength=25;
 int max5prDist=75,max3prDist=2000,upstreamGeneOverride=300;
 
 int main(int argc,char *argv[]) {
-  std::ifstream featFile("/Users/knaggert/Desktop/pcf11_summer/auxiliary/sorted_saccer3_simple_features_with_SUT_CUT_2micron_07Dec2016.txt",std::ios::in);
+  std::ifstream featFile("/data/internal/Biocore/pcf11_summer/auxiliary/sorted_saccer3_simple_features_with_SUT_CUT_2micron_07Dec2016.txt",std::ios::in);
   //std::ifstream featFile("/Users/jhgraber/data/yeast/saccer3_simple_features.txt",std::ios::in);
   std::cerr << "loading feature file..."; 
 
