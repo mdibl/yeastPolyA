@@ -38,7 +38,7 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/util.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/util.h"
 
 // use STL maps to hold the pertinent data
 typedef std::vector<int> iVec;
