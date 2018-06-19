@@ -6,7 +6,7 @@
 #include <functional>
 #include <algorithm>
 
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/util.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/util.h"
 
 typedef std::vector<int> iVec;
 // string to integer map, for sample to counts- at the end, all entries will be filled including 0 entries
