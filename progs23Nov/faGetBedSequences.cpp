@@ -4,9 +4,9 @@
 #include <map>
 #include <functional>
 
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/util.h"
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/basicSeq.h"
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/fastaSeq.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/util.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/basicSeq.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/fastaSeq.h"
 
 typedef std::map<std::string,std::string,std::less<std::string> > namedSeqMap;
 // load fastaSeqs
