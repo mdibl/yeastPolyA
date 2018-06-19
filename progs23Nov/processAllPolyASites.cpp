@@ -34,7 +34,7 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
-#include "/Users/knaggert/Desktop/pcf11_summer/progs23Nov/util.h"
+#include "/opt/software/internal/yeastPolyA/progs23Nov/util.h"
 
 int UScutoff=80,DScutoff=1000,AGthreshold=8,multiSwitch=0,paProbCutoff=30;
 int ppCutoff=100;
