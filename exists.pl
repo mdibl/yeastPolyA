@@ -31,11 +31,11 @@ use FileHandle;
 use File::Copy;
 
 
-my $psllocation = "/Users/knaggert/Desktop/pcf11_summer/abc/";
-my $makefilelocation = "/Users/knaggert/Desktop/pcf11_summer/";
+my $psllocation = "/data/internal/Biocore/pcf11_summer/abc/";
+my $makefilelocation = "/opt/software/internal/yeastPolyA/";
 my $makefileBase = "makefile_base";
 my $assignedMakefile = "makefile";
-my $existingdir = "/Users/knaggert/Desktop/pcf11_summer/outFiles";
+my $existingdir = "/data/internal/Biocore/pcf11_summer/outFiles";
 
 my $fh = FileHandle->new;
 
