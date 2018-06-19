@@ -12,7 +12,7 @@ makefile:
 
 # Variables: No variables.
 
-include configFile.txt
+include /opt/software/internal/yeastPolyA/configFile.txt
 
 %.o: %.cpp #Creates the .o file for any given .cpp file
 	g++ -O3 -c $<
