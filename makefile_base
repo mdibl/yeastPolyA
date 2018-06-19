@@ -25,7 +25,7 @@ makefile:
 # expNm = Project prefix
 # separator = string used to split up certain lines (Can be anything apart from a single '_')
 
-include /Users/knaggert/Desktop/pcf11_summer/configFile.txt  #Including the configuration file allows user to manipulate variables used through makefile
+include /opt/software/internal/yeastPolyA/configFile.txt  #Including the configuration file allows user to manipulate variables used through makefile
 
 %_alnCount.txt: $(DPATH)%.psl #Creates the _alnCount.txt file, sequenceAliignement | number of allignments, from the .psl file
 	echo $(DPATH) $<
